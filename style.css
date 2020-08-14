@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+
+.cell {
+    display: flex;
+    border: .2px solid silver;
+    height: 34px;
+    width: 34px;
+}
