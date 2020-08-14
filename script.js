@@ -1,8 +1,6 @@
 let container = document.querySelector('.container');
 let div;
 
-makeGrid(16, 16);
-
 // Generating the drawing grid
 function makeGrid(x, y) {
     container.style['grid-template'] = 
@@ -16,3 +14,15 @@ function makeGrid(x, y) {
         }
     }
 }
+
+function draw() {
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].addEventListener('mouseover', function() {
+            grid[i].style.backgroundColor = '#000000';
+        });
+    }
+}
+
+makeGrid(16, 16);
+let grid = document.querySelectorAll('.container > .cell');
+draw();
