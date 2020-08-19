@@ -1,5 +1,6 @@
 let container = document.querySelector('.container');
 let div;
+let grid;
 let maxSize = 550;
 let nCells = 16;
 let sizeOfCells;
@@ -29,6 +30,8 @@ function makeGrid(nCells) {
             container.appendChild(div);
         }
     }
+
+    grid = document.querySelectorAll('.container > .cell');
 }
 
 // Changes the color of a cell when the mouse rolls over it
@@ -48,11 +51,20 @@ function reset() {
 }
 
 // Creates a new grid with different sized cells based on user input
-function newGrid() {
-    nCells = prompt('Enter a number between 1 and 25');
+function replaceGrid() {
+    nCells = prompt('Enter a number between 1 and 50');
+    if (nCells > 50 || nCells < 1) {
+        if (typeof(nCells) != 'object') { // ignore following code if the prompt was canceled
+            alert("That's not within range!");
+        }
+    } else {
+        while (container.hasChildNodes()) {
+            container.removeChild(container.firstChild);
+        }
 
+        makeGrid(nCells);
+    }
 }
 
 makeGrid(nCells);
-let grid = document.querySelectorAll('.container > .cell');
 draw();
