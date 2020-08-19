@@ -23,6 +23,12 @@ function draw() {
     }
 }
 
+function reset() {
+    for(let i = 0; i < grid.length; i++) {
+        grid[i].style.backgroundColor = '#FFF'
+    }
+}
+
 makeGrid(16, 16);
 let grid = document.querySelectorAll('.container > .cell');
 draw();
