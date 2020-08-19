@@ -1,13 +1,29 @@
 let container = document.querySelector('.container');
 let div;
+let maxSize = 550;
+let nCells = 16;
+let sizeOfCells;
+
+// Get the size of the grid cells
+function getSizeOfCells(maxSize, nCells) {
+    // Set up local version of variable so it doesn't 
+    // get mixed up with the global version
+    let sizeOfCells; 
+
+    sizeOfCells = maxSize / nCells;
+    sizeOfCells = sizeOfCells + 'px';
+    return sizeOfCells;
+}
 
 // Generating the drawing grid
-function makeGrid(x, y) {
-    container.style['grid-template'] = 
-    `repeat(${x}, 34px) / repeat(${y}, 34px)`;
+function makeGrid(nCells) {
+    sizeOfCells = getSizeOfCells(maxSize, nCells);
 
-    for (let i = 0; i < x; i++) {
-        for (let j = 0; j < y; j++) {
+    container.style['grid-template'] = 
+    `repeat(${nCells}, ${sizeOfCells}) / repeat(${nCells}, ${sizeOfCells})`;
+
+    for (let i = 0; i < nCells; i++) {
+        for (let j = 0; j < nCells; j++) {
             div = document.createElement('div');
             div.classList.add('cell');
             container.appendChild(div);
@@ -15,20 +31,28 @@ function makeGrid(x, y) {
     }
 }
 
+// Changes the color of a cell when the mouse rolls over it
 function draw() {
     for (let i = 0; i < grid.length; i++) {
         grid[i].addEventListener('mouseover', function() {
-            grid[i].style.backgroundColor = '#000000';
+            grid[i].style.backgroundColor = '#000';
         });
     }
 }
 
+// Resets the color of the grid to white
 function reset() {
     for(let i = 0; i < grid.length; i++) {
-        grid[i].style.backgroundColor = '#FFF'
+        grid[i].style.backgroundColor = '#FFF';
     }
 }
 
-makeGrid(16, 16);
+// Creates a new grid with different sized cells based on user input
+function newGrid() {
+    nCells = prompt('Enter a number between 1 and 25');
+
+}
+
+makeGrid(nCells);
 let grid = document.querySelectorAll('.container > .cell');
 draw();
