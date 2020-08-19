@@ -30,12 +30,12 @@ function makeGrid(nCells) {
             container.appendChild(div);
         }
     }
-
-    grid = document.querySelectorAll('.container > .cell');
 }
 
 // Changes the color of a cell when the mouse rolls over it
 function draw() {
+    grid = document.querySelectorAll('.container > .cell');
+
     for (let i = 0; i < grid.length; i++) {
         grid[i].addEventListener('mouseover', function() {
             grid[i].style.backgroundColor = '#000';
@@ -44,7 +44,7 @@ function draw() {
 }
 
 // Resets the color of the grid to white
-function reset() {
+function clearGrid() {
     for(let i = 0; i < grid.length; i++) {
         grid[i].style.backgroundColor = '#FFF';
     }
@@ -58,11 +58,14 @@ function replaceGrid() {
             alert("That's not within range!");
         }
     } else {
+        // Remove old grid
         while (container.hasChildNodes()) {
             container.removeChild(container.firstChild);
         }
 
+        // Establish new grid
         makeGrid(nCells);
+        draw();
     }
 }
 
