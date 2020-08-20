@@ -1,3 +1,4 @@
-Soon to be a browser version of some kind of cross between a sketchpad and an Etch-A-Sketch, this project aims to develop my DOM manipulation and googling skills.
+A browser version of some kind of cross between a sketchpad and an Etch-A-Sketch, this project aimed to develop my DOM manipulation and googling skills. A bit out of my comfort zone, I found that I improved in finding web articles quickly and efficiently to give more insight on topics I had yet to learn but needed to implement to complete the project. While it did not come out looking very flashy, there was a lot more under the hood going on that I enjoyed setting up.
 
+A live version can be found on a <a href="https://jessiejalca.github.io/etch-a-sketch/">GitHub Pages</a> site.
 From The Odin Project's <a href="https://www.theodinproject.com/lessons/etch-a-sketch-project">curriculum</a>.
