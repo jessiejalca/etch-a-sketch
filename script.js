@@ -85,16 +85,8 @@ function getRandomColor() {
     
 }
 
-// function shadeColor(cell) {
-//     counter = cell.getAttribute('data-counter');
-//     counter -= 1;
-//     cell.style.filter= `brightness(${counter*10}%)`;
-//     cell.setAttribute('data-counter', counter);
-// }
-
 blackPen.addEventListener('click', function() {
     for (let i = 0; i < grid.length; i++) {
-        grid[i].removeEventListener('mouseover', shadeColor);
         grid[i].removeEventListener('mouseover', getRandomColor);
     }
 
@@ -104,24 +96,29 @@ blackPen.addEventListener('click', function() {
 
 rainbowPen.addEventListener('click', function() {
     for (let i = 0; i < grid.length; i++) {
-        grid[i].removeEventListener('mouseover', shadeColor);
+        // grid[i].removeEventListener('mouseover', shadeColor);
         grid[i].addEventListener('mouseover', getRandomColor);
+    }
+    draw();
+});
+
+shadePen.addEventListener('click', function() {
+    counter = 0;
+    penColor = 'white';
+
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].removeEventListener('mouseover', getRandomColor);
+
+        grid[i].addEventListener('mouseover', function shadeColor() {
+            counter = grid[i].getAttribute('data-counter');
+            counter -= 1;
+            grid[i].style.filter= `brightness(${counter*10}%)`;
+            grid[i].setAttribute('data-counter', counter);
+        });
     }
 
     draw();
 });
-
-// shadePen.addEventListener('click', function() {
-//     counter = 0;
-//     penColor = 'white';
-
-//     for (let i = 0; i < grid.length; i++) {
-//         grid[i].removeEventListener('mouseover', getRandomColor);
-//         grid[i].addEventListener('mouseover', shadeColor(grid[i]));
-//     }
-
-//     draw();
-// });
 
 makeGrid(nCells);
 draw();
