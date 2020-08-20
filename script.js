@@ -76,6 +76,7 @@ function replaceGrid() {
     }
 }
 
+// Randomizes colors
 function getRandomColor() {
     let r = Math.floor(Math.random()*256);
     let g = Math.floor(Math.random()*256);
@@ -85,8 +86,18 @@ function getRandomColor() {
     
 }
 
+// Adds a layer of shade
+function shadeColor() {
+    counter = this.getAttribute('data-counter');
+    counter -= 1;
+    this.style.filter= `brightness(${counter*10}%)`;
+    this.setAttribute('data-counter', counter);
+}
+
+// Switches to black pen when button is clicked
 blackPen.addEventListener('click', function() {
     for (let i = 0; i < grid.length; i++) {
+        grid[i].removeEventListener('mouseover', shadeColor);
         grid[i].removeEventListener('mouseover', getRandomColor);
     }
 
@@ -94,29 +105,24 @@ blackPen.addEventListener('click', function() {
     draw();
 });
 
+// Switches to rainbow pen when button is clicked
 rainbowPen.addEventListener('click', function() {
     for (let i = 0; i < grid.length; i++) {
-        // grid[i].removeEventListener('mouseover', shadeColor);
+        grid[i].removeEventListener('mouseover', shadeColor);
         grid[i].addEventListener('mouseover', getRandomColor);
     }
     draw();
 });
 
+// Switches to shade pen when button is clicked
 shadePen.addEventListener('click', function() {
     counter = 0;
-    penColor = 'white';
+    penColor = 'rgba(250, 250, 250)';
 
     for (let i = 0; i < grid.length; i++) {
         grid[i].removeEventListener('mouseover', getRandomColor);
-
-        grid[i].addEventListener('mouseover', function shadeColor() {
-            counter = grid[i].getAttribute('data-counter');
-            counter -= 1;
-            grid[i].style.filter= `brightness(${counter*10}%)`;
-            grid[i].setAttribute('data-counter', counter);
-        });
+        grid[i].addEventListener('mouseover', shadeColor);
     }
-
     draw();
 });
 
