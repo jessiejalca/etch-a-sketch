@@ -9,7 +9,7 @@ let counter;
 
 const blackPen = document.querySelector('#black-pen');
 const rainbowPen = document.querySelector('#rainbow-pen');
-const shadePen = document.querySelector('#shade-pen');
+const pencil = document.querySelector('#pencil');
 
 // Get the size of the grid cells
 function getSizeOfCells(maxSize, nCells) {
@@ -115,9 +115,9 @@ rainbowPen.addEventListener('click', function() {
 });
 
 // Switches to shade pen when button is clicked
-shadePen.addEventListener('click', function() {
+pencil.addEventListener('click', function() {
     counter = 0;
-    penColor = 'rgba(250, 250, 250)';
+    penColor = 'rgba(250, 250, 250, 1)';
 
     for (let i = 0; i < grid.length; i++) {
         grid[i].removeEventListener('mouseover', getRandomColor);
