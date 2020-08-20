@@ -4,6 +4,12 @@ let grid;
 let maxSize = 550;
 let nCells = 16;
 let sizeOfCells;
+let penColor = '#000';
+let counter;
+
+const blackPen = document.querySelector('#black-pen');
+const rainbowPen = document.querySelector('#rainbow-pen');
+const shadePen = document.querySelector('#shade-pen');
 
 // Get the size of the grid cells
 function getSizeOfCells(maxSize, nCells) {
@@ -27,6 +33,7 @@ function makeGrid(nCells) {
         for (let j = 0; j < nCells; j++) {
             div = document.createElement('div');
             div.classList.add('cell');
+            div.setAttribute('data-counter', 10);
             container.appendChild(div);
         }
     }
@@ -38,7 +45,7 @@ function draw() {
 
     for (let i = 0; i < grid.length; i++) {
         grid[i].addEventListener('mouseover', function() {
-            grid[i].style.backgroundColor = '#000';
+            grid[i].style.backgroundColor = penColor;
         });
     }
 }
@@ -68,6 +75,53 @@ function replaceGrid() {
         draw();
     }
 }
+
+function getRandomColor() {
+    let r = Math.floor(Math.random()*256);
+    let g = Math.floor(Math.random()*256);
+    let b = Math.floor(Math.random()*256);
+
+    penColor = 'rgb('+r+','+g+','+b+')';
+    
+}
+
+// function shadeColor(cell) {
+//     counter = cell.getAttribute('data-counter');
+//     counter -= 1;
+//     cell.style.filter= `brightness(${counter*10}%)`;
+//     cell.setAttribute('data-counter', counter);
+// }
+
+blackPen.addEventListener('click', function() {
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].removeEventListener('mouseover', shadeColor);
+        grid[i].removeEventListener('mouseover', getRandomColor);
+    }
+
+    penColor = '#000';
+    draw();
+});
+
+rainbowPen.addEventListener('click', function() {
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].removeEventListener('mouseover', shadeColor);
+        grid[i].addEventListener('mouseover', getRandomColor);
+    }
+
+    draw();
+});
+
+// shadePen.addEventListener('click', function() {
+//     counter = 0;
+//     penColor = 'white';
+
+//     for (let i = 0; i < grid.length; i++) {
+//         grid[i].removeEventListener('mouseover', getRandomColor);
+//         grid[i].addEventListener('mouseover', shadeColor(grid[i]));
+//     }
+
+//     draw();
+// });
 
 makeGrid(nCells);
 draw();
